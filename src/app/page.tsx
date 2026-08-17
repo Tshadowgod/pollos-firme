@@ -87,7 +87,7 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-md text-lg font-semibold text-pollo-navy/85 md:mx-0">
+          <p className="mx-auto mt-5 max-w-md text-lg font-semibold text-pollo-navy md:mx-0">
             Especialistas en <strong>pollo broaster</strong> y{" "}
             <strong>pollo a la brasa</strong>. Crocante por fuera, jugosito por
             dentro.
@@ -120,7 +120,7 @@ function Hero() {
                 <dt className="font-display text-lg text-pollo-navy">
                   {icon} {title}
                 </dt>
-                <dd className="text-sm font-semibold text-pollo-navy/60">
+                <dd className="text-sm font-semibold text-pollo-navy/85">
                   {sub}
                 </dd>
               </div>
@@ -542,7 +542,7 @@ export function SectionTitle({
         {title}
       </h2>
       {subtitle && (
-        <p className="mx-auto mt-3 max-w-xl font-semibold text-pollo-navy/75">
+        <p className="mx-auto mt-3 max-w-xl font-semibold text-pollo-navy">
           {subtitle}
         </p>
       )}

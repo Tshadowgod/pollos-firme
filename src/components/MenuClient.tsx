@@ -91,7 +91,7 @@ export default function MenuClient({
           <p className="mt-4 font-display text-3xl text-pollo-navy drop-poster">
             No encontramos ese plato
           </p>
-          <p className="mt-1 font-semibold text-pollo-navy/70">
+          <p className="mt-1 font-semibold text-pollo-navy">
             Probá con otra búsqueda o mirá todo el menú.
           </p>
         </div>
@@ -106,12 +106,12 @@ export default function MenuClient({
                     {category.name}
                   </h2>
                   {category.description && (
-                    <p className="text-sm font-semibold text-pollo-navy/70">
+                    <p className="text-sm font-semibold text-pollo-navy">
                       {category.description}
                     </p>
                   )}
                 </div>
-                <span className="ml-auto pb-1 font-display text-base text-pollo-navy/60">
+                <span className="ml-auto pb-1 font-display text-base text-pollo-navy/85">
                   {items.length} {items.length === 1 ? "plato" : "platos"}
                 </span>
               </div>

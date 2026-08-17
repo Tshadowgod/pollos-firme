@@ -21,12 +21,14 @@ export default function AboutPage() {
       />
 
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:px-8">
-        <div>
+        {/* El texto va sobre papel claro: marrón sobre el naranja del fondo
+            no da contraste suficiente para leer párrafos largos. */}
+        <div className="rounded-[2rem] border-4 border-pollo-navy bg-pollo-cream p-7 shadow-[var(--shadow-card)] sm:p-9">
           <h2 className="font-display text-4xl text-pollo-navy">
             Nacimos con una idea simple:
             <span className="text-pollo-red"> hacer el pollo bien.</span>
           </h2>
-          <div className="mt-5 space-y-4 leading-relaxed text-pollo-charcoal/75">
+          <div className="mt-5 space-y-4 font-medium leading-relaxed text-pollo-charcoal">
             <p>
               {site.name} arrancó como un negocio de barrio, con una receta de
               marinado que se pasó de generación en generación. Nada de atajos:
@@ -45,7 +47,7 @@ export default function AboutPage() {
 
           <Link
             href="/menu"
-            className="mt-7 inline-block rounded-full bg-pollo-red px-8 py-3.5 font-display text-lg text-white shadow-[var(--shadow-pop)] transition hover:-translate-y-1"
+            className="mt-7 inline-block rounded-full bg-pollo-red px-8 py-3.5 font-display text-lg text-white shadow-[var(--shadow-pop)] transition hover:-translate-y-1 hover:bg-pollo-navy"
           >
             Probá nuestro menú
           </Link>

@@ -18,7 +18,7 @@ export default function PageHeader({
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto mt-4 max-w-xl text-lg font-semibold text-pollo-navy/80">
+          <p className="mx-auto mt-4 max-w-xl text-lg font-semibold text-pollo-navy">
             {subtitle}
           </p>
         )}
