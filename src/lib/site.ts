@@ -10,9 +10,9 @@ export const site = {
     "Pollería Pollo Firme: especialistas en pollo broaster y pollo a la brasa. Crocante por fuera, jugoso por dentro. Delivery y recojo en tienda.",
   url: "https://pollo-firme.vercel.app",
 
-  phone: "+591 700 00000",
+  phone: "+591 78064332",
   /** Número al que llegan los pedidos por WhatsApp (código de país sin "+"). */
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "59170000000",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "59178064332",
   email: "contacto@pollofirme.com",
 
   address: "Av. Principal #123, zona Central",
