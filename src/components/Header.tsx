@@ -41,14 +41,14 @@ export default function Header() {
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-3">
-          {/* La mascota ya viene recortada en círculo, con su aro y su halo:
-              no hace falta forzar el encuadre con escalas ni máscaras. */}
-          <span className="relative block size-13 shrink-0">
+          {/* La mascota es un PNG recortado con fondo transparente:
+              se apoya directo sobre el rojo, sin círculo ni máscaras. */}
+          <span className="relative block h-14 w-12 shrink-0">
             <Image
               src="/mascota.png"
               alt={site.name}
               fill
-              sizes="52px"
+              sizes="48px"
               className="object-contain drop-shadow-md"
               priority
             />
