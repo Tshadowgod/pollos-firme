@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <span className="relative block h-16 w-14 shrink-0">
               <Image
-                src="/mascota.png"
+                src="/mascota-firme.png"
                 alt={site.name}
                 fill
                 sizes="56px"

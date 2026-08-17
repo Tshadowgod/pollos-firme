@@ -45,7 +45,7 @@ export default function Header() {
               se apoya directo sobre el rojo, sin círculo ni máscaras. */}
           <span className="relative block h-14 w-12 shrink-0">
             <Image
-              src="/mascota.png"
+              src="/mascota-firme.png"
               alt={site.name}
               fill
               sizes="48px"
