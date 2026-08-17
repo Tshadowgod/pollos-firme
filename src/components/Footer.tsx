@@ -117,6 +117,10 @@ function Social({
   label: string;
   children: React.ReactNode;
 }) {
+  // Una red sin cuenta cargada no se muestra: mejor eso que un enlace
+  // que lleva a la portada genérica de la red social.
+  if (!href) return null;
+
   return (
     <a
       href={href}

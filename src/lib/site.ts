@@ -15,9 +15,12 @@ export const site = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "59178064332",
   email: "contacto@pollofirme.com",
 
-  address: "Av. Principal #123, zona Central",
-  city: "Cochabamba, Bolivia",
-  mapsUrl: "https://maps.google.com/?q=Pollo+Firme",
+  address: "Avenida Radial 10, zona Noel Kempff",
+  city: "Santa Cruz de la Sierra, Bolivia",
+  mapsUrl: "https://maps.app.goo.gl/YDHWpvfoYuWW2x5FA",
+  /** Coordenadas del local: el mapa incrustado las usa para no depender
+   *  de que Google acierte al buscar la dirección por texto. */
+  coords: { lat: -17.8128941, lng: -63.1195846 },
 
   hours: [
     { days: "Lunes a Jueves", time: "11:00 – 22:00" },
@@ -25,10 +28,11 @@ export const site = {
     { days: "Domingo", time: "11:00 – 22:00" },
   ],
 
+  /** Dejá en "" las redes que todavía no existan: no se muestran. */
   social: {
-    facebook: "https://facebook.com/",
-    instagram: "https://instagram.com/",
-    tiktok: "https://tiktok.com/",
+    facebook: "",
+    instagram: "",
+    tiktok: "https://www.tiktok.com/@pollo.firme",
   },
 
   /** Costo fijo de delivery en Bs. Poné 0 para envío gratis. */

@@ -68,9 +68,7 @@ export default function ContactPage() {
         <div className="overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
           <iframe
             title={`Ubicación de ${site.name}`}
-            src={`https://www.google.com/maps?q=${encodeURIComponent(
-              `${site.address}, ${site.city}`
-            )}&output=embed`}
+            src={`https://www.google.com/maps?q=${site.coords.lat},${site.coords.lng}&z=17&output=embed`}
             className="h-[420px] w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
