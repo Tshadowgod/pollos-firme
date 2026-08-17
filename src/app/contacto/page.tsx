@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   description: `Dirección, teléfono y horarios de atención de ${site.name}.`,
 };
 
+/**
+ * Abre Google Maps con la ruta ya trazada desde donde esté el cliente.
+ * En el celular arranca la app de Maps directamente.
+ */
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${site.coords.lat},${site.coords.lng}`;
+
 export default function ContactPage() {
   return (
     <>
@@ -65,7 +71,7 @@ export default function ContactPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-3xl shadow-[var(--shadow-card)]">
+        <div className="overflow-hidden rounded-3xl border-4 border-pollo-navy shadow-[var(--shadow-poster)]">
           <iframe
             title={`Ubicación de ${site.name}`}
             src={`https://www.google.com/maps?q=${site.coords.lat},${site.coords.lng}&z=17&output=embed`}
@@ -73,6 +79,26 @@ export default function ContactPage() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
+
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t-4 border-pollo-navy bg-poster-dark px-6 py-5">
+            <div>
+              <p className="font-display text-2xl text-pollo-amber">
+                {site.name}
+              </p>
+              <p className="text-sm font-medium text-white/75">
+                {site.address} · {site.city}
+              </p>
+            </div>
+
+            <a
+              href={DIRECTIONS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-pollo-amber px-7 py-3.5 font-display text-lg text-pollo-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              🧭 Cómo llegar
+            </a>
+          </div>
         </div>
       </section>
     </>
