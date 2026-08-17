@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 import type { OrderType } from "@/lib/types";
 import { buildOrderMessage, whatsappLink } from "@/lib/whatsapp";
 
-const PAYMENT_METHODS = ["Efectivo", "QR / Transferencia", "Tarjeta"] as const;
+const PAYMENT_METHODS = ["Efectivo", "QR"] as const;
 
 export default function CartClient() {
   const router = useRouter();
@@ -21,8 +21,6 @@ export default function CartClient() {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    address: "",
-    reference: "",
     notes: "",
     paymentMethod: PAYMENT_METHODS[0] as string,
   });
@@ -54,8 +52,6 @@ export default function CartClient() {
           customerName: form.name,
           customerPhone: form.phone,
           type,
-          address: type === "delivery" ? form.address : null,
-          reference: type === "delivery" ? form.reference : null,
           notes: form.notes,
           paymentMethod: form.paymentMethod,
           items: lines.map((l) => ({
@@ -78,8 +74,6 @@ export default function CartClient() {
         name: form.name,
         phone: form.phone,
         type,
-        address: form.address,
-        reference: form.reference,
         notes: form.notes,
         paymentMethod: form.paymentMethod,
         items: lines,
@@ -256,24 +250,6 @@ export default function CartClient() {
             required
           />
 
-          {type === "delivery" && (
-            <>
-              <Field
-                label="Dirección de entrega"
-                value={form.address}
-                onChange={(v) => update("address", v)}
-                placeholder="Av. Siempre Viva #742"
-                required
-              />
-              <Field
-                label="Referencia (opcional)"
-                value={form.reference}
-                onChange={(v) => update("reference", v)}
-                placeholder="Portón verde, frente a la plaza"
-              />
-            </>
-          )}
-
           <label className="block">
             <span className="text-sm font-bold text-pollo-navy">
               Forma de pago
@@ -325,6 +301,21 @@ export default function CartClient() {
           </div>
         </dl>
 
+        {/* La dirección no se escribe: el cliente manda su ubicación real
+            por WhatsApp, que para el motorizado es mucho más preciso. */}
+        {type === "delivery" && (
+          <div className="mt-5 rounded-2xl border-3 border-pollo-navy bg-pollo-amber/35 px-5 py-4">
+            <p className="font-display text-lg text-pollo-navy">
+              📍 Enviá tu ubicación por WhatsApp
+            </p>
+            <p className="mt-1 text-sm font-medium leading-relaxed text-pollo-charcoal">
+              Al confirmar se abre el chat con tu pedido escrito. Tocá el
+              clip 📎 → <strong>Ubicación</strong> y mandanos dónde estás: así
+              llegamos sin vueltas.
+            </p>
+          </div>
+        )}
+
         {error && (
           <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-pollo-red">
             {error}
@@ -336,7 +327,11 @@ export default function CartClient() {
           disabled={sending}
           className="mt-5 w-full rounded-full bg-[#25D366] px-6 py-4 font-display text-lg text-white shadow-lg transition hover:-translate-y-0.5 hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {sending ? "Enviando pedido…" : "Confirmar y enviar por WhatsApp"}
+          {sending
+            ? "Enviando pedido…"
+            : type === "delivery"
+              ? "Enviar pedido y ubicación"
+              : "Confirmar y enviar por WhatsApp"}
         </button>
 
         <p className="mt-3 text-center text-xs leading-relaxed text-pollo-navy/60">

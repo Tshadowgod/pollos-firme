@@ -193,9 +193,10 @@ export default function AdminDashboard({
                     >
                       {order.customer_phone}
                     </a>
-                    {order.type === "delivery" && order.address && (
+                    {order.type === "delivery" && (
                       <p className="mt-1 text-sm text-pollo-charcoal/70">
-                        📍 {order.address}
+                        📍{" "}
+                        {order.address ?? "Ubicación enviada por WhatsApp"}
                         {order.reference && ` · ${order.reference}`}
                       </p>
                     )}

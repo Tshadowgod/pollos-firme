@@ -45,8 +45,6 @@ export async function POST(request: Request) {
   const customerName = clean(body.customerName, 120);
   const customerPhone = clean(body.customerPhone, 30);
   const type = body.type === "recojo" ? "recojo" : "delivery";
-  const address = clean(body.address, 250);
-  const reference = clean(body.reference, 250);
   const notes = clean(body.notes, 500);
   const paymentMethod = clean(body.paymentMethod, 50) || "Efectivo";
 
@@ -65,13 +63,8 @@ export async function POST(request: Request) {
     );
   }
 
-  if (type === "delivery" && address.length < 5) {
-    return NextResponse.json(
-      { error: "Para delivery necesitamos la dirección de entrega." },
-      { status: 400 }
-    );
-  }
-
+  // No pedimos dirección escrita: en delivery, el cliente comparte su
+  // ubicación por WhatsApp junto con el resumen del pedido.
   if (!Array.isArray(body.items) || body.items.length === 0) {
     return NextResponse.json({ error: "Tu carrito está vacío." }, { status: 400 });
   }
@@ -132,8 +125,7 @@ export async function POST(request: Request) {
         notes, payment_method, subtotal, delivery_fee, total
       ) VALUES (
         ${code}, ${customerName}, ${customerPhone}, ${type}::order_type,
-        ${type === "delivery" ? address : null},
-        ${type === "delivery" && reference ? reference : null},
+        NULL, NULL,
         ${notes || null}, ${paymentMethod}, ${subtotal}, ${deliveryFee}, ${total}
       )
       RETURNING id, code

@@ -157,7 +157,7 @@ export default async function OrderPage({
               label="Entrega"
               value={
                 order.type === "delivery"
-                  ? (order.address ?? "—")
+                  ? (order.address ?? "Ubicación enviada por WhatsApp")
                   : `${site.address}, ${site.city}`
               }
             />

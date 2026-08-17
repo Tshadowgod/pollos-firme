@@ -7,8 +7,6 @@ export type WhatsAppOrder = {
   name: string;
   phone: string;
   type: OrderType;
-  address?: string;
-  reference?: string;
   notes?: string;
   paymentMethod: string;
   items: CartLine[];
@@ -31,11 +29,6 @@ export function buildOrderMessage(order: WhatsAppOrder): string {
     `🛵 *Entrega:* ${order.type === "delivery" ? "Delivery" : "Recojo en tienda"}`,
   ];
 
-  if (order.type === "delivery") {
-    lines.push(`📍 *Dirección:* ${order.address ?? "—"}`);
-    if (order.reference) lines.push(`🧭 *Referencia:* ${order.reference}`);
-  }
-
   lines.push(`💵 *Pago:* ${order.paymentMethod}`, "", "*── PEDIDO ──*");
 
   for (const item of order.items) {
@@ -52,6 +45,12 @@ export function buildOrderMessage(order: WhatsAppOrder): string {
   );
 
   if (order.notes) lines.push("", `📝 *Nota:* ${order.notes}`);
+
+  // El cliente adjunta su ubicación en el mismo chat, así el motorizado
+  // recibe el punto exacto en vez de una dirección escrita a mano.
+  if (order.type === "delivery") {
+    lines.push("", "📍 *Les envío mi ubicación acá abajo* 👇");
+  }
 
   return lines.join("\n");
 }
