@@ -93,13 +93,14 @@ function Hero() {
             dentro.
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <Link
               href="/menu"
               className="rounded-full bg-pollo-navy px-8 py-4 font-display text-xl text-pollo-amber shadow-[var(--shadow-poster)] transition hover:-translate-y-1 hover:bg-pollo-red hover:text-white"
             >
               Ver el menú 🍗
             </Link>
+            <TikTokButton />
             <a
               href={`https://wa.me/${site.whatsapp}`}
               target="_blank"
@@ -141,6 +142,30 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Acceso directo al TikTok de la pollería, al lado del botón del menú.
+ * Si todavía no hay cuenta cargada en site.ts no se muestra nada, así
+ * nunca queda un botón que lleva a la nada.
+ */
+function TikTokButton() {
+  if (!site.social.tiktok) return null;
+
+  return (
+    <a
+      href={site.social.tiktok}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Seguinos en TikTok"
+      title="Seguinos en TikTok"
+      className="group grid size-16 shrink-0 place-items-center rounded-full border-4 border-white bg-pollo-navy text-white shadow-[var(--shadow-poster)] transition hover:-translate-y-1 hover:bg-pollo-red"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" className="size-7" aria-hidden>
+        <path d="M16.5 2h-3v13.2a2.6 2.6 0 1 1-2.2-2.6v-3a5.6 5.6 0 1 0 5.2 5.6V9.4c1 .7 2.2 1.1 3.5 1.2v-3a4.1 4.1 0 0 1-3.5-3.6V2z" />
+      </svg>
+    </a>
   );
 }
 
