@@ -13,6 +13,8 @@ export type WhatsAppOrder = {
   subtotal: number;
   deliveryFee: number;
   total: number;
+  /** Link a /pedido/<código> para seguir el estado del pedido. */
+  trackingUrl: string;
 };
 
 /**
@@ -51,6 +53,14 @@ export function buildOrderMessage(order: WhatsAppOrder): string {
   if (order.type === "delivery") {
     lines.push("", "📍 *Les envío mi ubicación acá abajo* 👇");
   }
+
+  // El link viaja dentro del mensaje: así le queda al cliente guardado en
+  // su propio chat y puede volver a mirar el estado cuando quiera.
+  lines.push(
+    "",
+    "🔎 *Seguí tu pedido acá:*",
+    order.trackingUrl
+  );
 
   return lines.join("\n");
 }

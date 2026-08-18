@@ -69,6 +69,10 @@ export default function CartClient() {
 
       // El pedido ya quedó guardado en la base de datos; ahora lo mandamos
       // al WhatsApp de la pollería con los totales que calculó el servidor.
+      // El origin sale del navegador, así el link de seguimiento apunta al
+      // dominio real en producción y a localhost mientras desarrollamos.
+      const trackingUrl = `${window.location.origin}/pedido/${data.code}`;
+
       const message = buildOrderMessage({
         code: data.code,
         name: form.name,
@@ -80,6 +84,7 @@ export default function CartClient() {
         subtotal: data.subtotal,
         deliveryFee: data.deliveryFee,
         total: data.total,
+        trackingUrl,
       });
 
       window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
