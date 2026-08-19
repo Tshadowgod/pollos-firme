@@ -244,27 +244,21 @@ function Promo({ promo }: { promo: Promotion }) {
   );
 }
 
+/** Marco blanco del afiche. */
+const PROMO_FRAME =
+  "overflow-hidden rounded-[1.75rem] border-6 border-white shadow-[var(--shadow-poster)]";
+
 /**
- * Espacio del afiche. Usa `object-contain` a propósito: un flyer vertical
- * u horizontal se ve entero, sin recortar los precios ni el texto.
+ * Espacio del afiche. El marco blanco se ajusta al alto y al ancho real de
+ * la foto: nada de caja fija con `object-contain`, que dejaba franjas
+ * naranjas entre el borde y el flyer. `w-fit` encoge el marco hasta la
+ * imagen; el flyer se agranda hasta llenar el ancho y como mucho hasta
+ * 38rem de alto, así uno vertical tampoco se desborda ni se recorta.
  */
 function PromoImage({ promo }: { promo: Promotion }) {
-  return (
-    <div className="mt-7 overflow-hidden rounded-[1.75rem] border-6 border-white shadow-[var(--shadow-poster)]">
-      {promo.image_url ? (
-        <div className="relative h-[24rem] w-full sm:h-[32rem] lg:h-[38rem]">
-          <Image
-            src={promo.image_url}
-            alt={promo.title}
-            fill
-            sizes="(max-width: 1280px) 100vw, 1200px"
-            // El afiche tiene texto y precios chicos: subimos la calidad
-            // muy por encima del 75 % que usa Next por defecto.
-            quality={95}
-            className="object-contain"
-          />
-        </div>
-      ) : (
+  if (!promo.image_url) {
+    return (
+      <div className={`mt-7 ${PROMO_FRAME}`}>
         <div className="grid h-[24rem] place-items-center p-8 text-center sm:h-[32rem]">
           <div>
             <span className="text-[7rem] leading-none drop-shadow-lg">🍗</span>
@@ -273,7 +267,26 @@ function PromoImage({ promo }: { promo: Promotion }) {
             </p>
           </div>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`mx-auto mt-7 w-fit max-w-full ${PROMO_FRAME}`}>
+      <Image
+        src={promo.image_url}
+        alt={promo.title}
+        // La foto vive en la base y no sabemos su tamaño hasta que carga:
+        // estas medidas solo reservan el espacio, el navegador usa la
+        // proporción verdadera apenas la descarga.
+        width={1536}
+        height={1024}
+        sizes="(max-width: 1280px) 100vw, 1200px"
+        // El afiche tiene texto y precios chicos: subimos la calidad
+        // muy por encima del 75 % que usa Next por defecto.
+        quality={95}
+        className="block h-auto max-h-[38rem] w-auto max-w-full"
+      />
     </div>
   );
 }
