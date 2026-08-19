@@ -124,7 +124,9 @@ export default function CartClient() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_400px]">
       {/* ── Lista de productos ── */}
-      <div>
+      {/* min-w-0: sin esto el ítem de grid no baja del ancho mínimo de su
+          contenido y desborda la pantalla en celulares angostos. */}
+      <div className="min-w-0">
         <div className="flex items-center justify-between">
           <h2 className="font-display text-2xl text-pollo-navy">
             Tu pedido ({count} {count === 1 ? "ítem" : "ítems"})
